@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFOMEISTER Hackathon 2025 | INFO Institute of Engineering</title>
+    <meta name="description" content="Join the INFOMEISTER Hackathon 2025 - An 8-hour coding challenge organized by CSE Association, INFO Institute of Engineering. Register now!">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
+    
+    <!-- Mouse Follower -->
+    <div class="mouse-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="glow-text">INFOMEISTER</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#timeline" class="nav-link">Timeline</a>
+                <a href="#prizes" class="nav-link">Prizes</a>
+                <a href="#location" class="nav-link">Location</a>
+                <a href="#register" class="nav-link glow-btn-nav">Register</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="typing-text" data-text="INFOMEISTER"></span>
+                    <br>
+                    <span class="hero-subtitle">Hackathon 2025</span>
+                </h1>
+                <p class="hero-description">
+                    An 8-hour Hackathon by CSE Association<br>
+                    <span class="highlight">INFO Institute of Engineering</span>
+                </p>
+                <div class="hero-cta">
+                    <a href="#register" class="cta-button main-cta">
+                        <span class="btn-text">Register Now</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-animation">About the Hackathon</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-grid">
+                    <div class="about-card reveal-animation">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">💡</div>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>Push the boundaries of technology and create groundbreaking solutions that can change the world.</p>
+                    </div>
+                    <div class="about-card reveal-animation">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">🤝</div>
+                        </div>
+                        <h3>Collaboration</h3>
+                        <p>Work with brilliant minds, share ideas, and build something amazing together in just 8 hours.</p>
+                    </div>
+                    <div class="about-card reveal-animation">
+                        <div class="card-icon">
+                            <div class="icon-wrapper">⚡</div>
+                        </div>
+                        <h3>Challenge</h3>
+                        <p>Test your coding skills, problem-solving abilities, and creativity under pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-animation">Competition Timeline</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item reveal-animation" data-round="1">
+                    <div class="timeline-marker">
+                        <div class="marker-inner">1</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <h3>Round 1: BRD Documentation</h3>
+                            <div class="timeline-details">
+                                <p><strong>Registration Portal Open:</strong> 20 – 26 Sept</p>
+                                <p><strong>Result:</strong> 28 Sept</p>
+                            </div>
+                            <div class="timeline-description">
+                                Create comprehensive Business Requirements Document to showcase your project vision.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-animation" data-round="2">
+                    <div class="timeline-marker">
+                        <div class="marker-inner">2</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <h3>Round 2: UI/UX Design</h3>
+                            <div class="timeline-details">
+                                <p><strong>Date:</strong> 29 Sept – 4 Oct</p>
+                                <p><strong>Result:</strong> 7 Oct</p>
+                            </div>
+                            <div class="timeline-description">
+                                Design intuitive and visually appealing user interfaces for your application.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-animation" data-round="3">
+                    <div class="timeline-marker">
+                        <div class="marker-inner">3</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <h3>Round 3: Coding & Presentation</h3>
+                            <div class="timeline-details">
+                                <p><strong>Date:</strong> 7 – 16 Oct (10 days)</p>
+                                <p><strong>Final Result:</strong> 17 Oct at INFO Institute</p>
+                            </div>
+                            <div class="timeline-description">
+                                Bring your ideas to life with code and present your final solution to the judges.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prizes Section -->
+    <section id="prizes" class="prizes">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-animation">Prizes & Recognition</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="prizes-grid">
+                <div class="prize-card reveal-animation" data-position="2nd">
+                    <div class="prize-icon">🥈</div>
+                    <div class="prize-position">2nd Prize</div>
+                    <div class="prize-amount">₹5,000</div>
+                    <div class="prize-glow"></div>
+                </div>
+                
+                <div class="prize-card reveal-animation winner" data-position="1st">
+                    <div class="prize-crown">👑</div>
+                    <div class="prize-icon">🏆</div>
+                    <div class="prize-position">1st Prize</div>
+                    <div class="prize-amount">₹10,000</div>
+                    <div class="prize-glow"></div>
+                </div>
+                
+                <div class="prize-card reveal-animation" data-position="3rd">
+                    <div class="prize-icon">🥉</div>
+                    <div class="prize-position">3rd Prize</div>
+                    <div class="prize-amount">₹2,500</div>
+                    <div class="prize-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="register" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title reveal-animation">Ready to Code the Future?</h2>
+                <p class="cta-description reveal-animation">
+                    Join hundreds of developers, designers, and innovators in this epic coding challenge.
+                    <br>Register now and be part of something extraordinary!
+                </p>
+                <div class="cta-buttons reveal-animation">
+                    <a href="https://forms.google.com/hackathon-register" class="cta-button primary" target="_blank" rel="noopener">
+                        <span class="btn-text">Register Now</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="#about" class="cta-button secondary">
+                        <span class="btn-text">Learn More</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title reveal-animation">Event Location</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="location-content">
+                <div class="location-info reveal-animation">
+                    <div class="location-card">
+                        <div class="location-icon">📍</div>
+                        <h3>INFO Institute of Engineering</h3>
+                        <p class="location-address">
+                            Kovilpalayam, Coimbatore,<br>
+                            Tamil Nadu, India - 641035
+                        </p>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">🕐</span>
+                                <span>Final Presentation: October 17, 2025</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🚗</span>
+                                <span>Parking Available</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📞</span>
+                                <span>Contact: +91-XXX-XXX-XXXX</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.app.goo.gl/HdVFniGmnwexgbkx7" 
+                           target="_blank" 
+                           rel="noopener" 
+                           class="location-button">
+                            <span class="btn-text">Get Directions</span>
+                            <div class="btn-glow"></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="map-container reveal-animation">
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.8028280860117!2d77.03642177452143!3d11.128057652610462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8f9be09f83881%3A0x20dd70b69c2b1b20!2sINFO%20Institute%20Of%20Engineering!5e0!3m2!1sen!2sin!4v1758115186050!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="INFO Institute of Engineering Location">
+                        </iframe>
+                        <div class="map-overlay">
+                            <div class="map-marker">
+                                <div class="marker-pulse"></div>
+                                <div class="marker-icon">🏫</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 INFOMEISTER - CSE Association, INFO Institute of Engineering</p>
+                    <p>Crafted with ⚡ for innovation</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">About Institute</a>
+                    <a href="#" class="footer-link">CSE Association</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
