@@ -329,6 +329,18 @@ body {
     box-shadow: 0 0 30px var(--secondary-neon);
 }
 
+.cta-button.tertiary {
+    border-color: var(--tertiary-neon);
+}
+
+.cta-button.tertiary::before {
+    background: var(--gradient-tertiary);
+}
+
+.cta-button.tertiary:hover {
+    box-shadow: 0 0 30px var(--tertiary-neon);
+}
+
 .btn-glow {
     position: absolute;
     top: 0;

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statements | INFOMEISTER Hackathon 2025</title>
+    <meta name="description" content="Explore 30 innovative problem statements for INFOMEISTER Hackathon 2025. Choose your challenge and start building the future!">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="problem-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
+    
+    <!-- Mouse Follower -->
+    <div class="mouse-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <span class="glow-text">INFOMEISTER</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#timeline" class="nav-link">Timeline</a>
+                <a href="index.html#prizes" class="nav-link">Prizes</a>
+                <a href="index.html#location" class="nav-link">Location</a>
+                <a href="index.html#register" class="nav-link glow-btn-nav">Register</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="problems-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title reveal-animation">
+                    <span class="typing-text" data-text="Problem Statements"></span>
+                    <br>
+                    <span class="hero-subtitle">Choose Your Challenge</span>
+                </h1>
+                <p class="hero-description reveal-animation">
+                    Explore 30 innovative problem statements designed to push the boundaries of technology.
+                    <br>Pick the challenge that inspires you most and start building the future!
+                </p>
+                <div class="hero-stats reveal-animation">
+                    <div class="stat-item">
+                        <span class="stat-number">30</span>
+                        <span class="stat-label">Problem Statements</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Hours to Code</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Possibilities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-controls reveal-animation">
+                <h3>Filter by Category</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Problems</button>
+                    <button class="filter-btn" data-filter="web">Web Development</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+                    <button class="filter-btn" data-filter="ai">AI/ML</button>
+                    <button class="filter-btn" data-filter="iot">IoT</button>
+                    <button class="filter-btn" data-filter="blockchain">Blockchain</button>
+                    <button class="filter-btn" data-filter="data">Data Science</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statements Grid -->
+    <section class="problems-grid-section">
+        <div class="container">
+            <div class="problems-grid">
+                
+                <!-- Problem 1 -->
+                <div class="problem-card reveal-animation" data-category="web" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">01</span>
+                        <span class="problem-category">Web Development</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Smart Campus Management System</h3>
+                    <p class="problem-description">
+                        Develop a comprehensive web platform for managing campus resources, student activities, and academic workflows with real-time notifications and analytics.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 2 -->
+                <div class="problem-card reveal-animation" data-category="mobile" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">02</span>
+                        <span class="problem-category">Mobile Apps</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">AR-Based Learning Companion</h3>
+                    <p class="problem-description">
+                        Create an augmented reality mobile application that enhances learning experiences through interactive 3D models and immersive educational content.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">ARCore</span>
+                        <span class="tag">Firebase</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 3 -->
+                <div class="problem-card reveal-animation" data-category="ai" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">03</span>
+                        <span class="problem-category">AI/ML</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Emotion-Aware Chatbot</h3>
+                    <p class="problem-description">
+                        Build an intelligent chatbot that can detect user emotions through text analysis and respond with appropriate empathy and support.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">TensorFlow</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 4 -->
+                <div class="problem-card reveal-animation" data-category="iot" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">04</span>
+                        <span class="problem-category">IoT</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Smart Waste Management</h3>
+                    <p class="problem-description">
+                        Design an IoT-based system to monitor waste levels in bins, optimize collection routes, and reduce environmental impact.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Arduino</span>
+                        <span class="tag">Sensors</span>
+                        <span class="tag">MQTT</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 5-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 5 -->
+                <div class="problem-card reveal-animation" data-category="blockchain" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">05</span>
+                        <span class="problem-category">Blockchain</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Decentralized Voting System</h3>
+                    <p class="problem-description">
+                        Create a secure, transparent, and tamper-proof voting system using blockchain technology for elections and governance.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Solidity</span>
+                        <span class="tag">Web3</span>
+                        <span class="tag">Ethereum</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 6 -->
+                <div class="problem-card reveal-animation" data-category="data" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">06</span>
+                        <span class="problem-category">Data Science</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Climate Change Predictor</h3>
+                    <p class="problem-description">
+                        Analyze environmental data to predict climate patterns and provide actionable insights for sustainable development.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Scikit-learn</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 5-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 7 -->
+                <div class="problem-card reveal-animation" data-category="web" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">07</span>
+                        <span class="problem-category">Web Development</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Digital Recipe Organizer</h3>
+                    <p class="problem-description">
+                        Build a web application for organizing, sharing, and discovering recipes with smart search and meal planning features.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Local Storage</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 8 -->
+                <div class="problem-card reveal-animation" data-category="mobile" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">08</span>
+                        <span class="problem-category">Mobile Apps</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Fitness Buddy Tracker</h3>
+                    <p class="problem-description">
+                        Develop a mobile app that tracks workouts, provides personalized fitness plans, and connects users with workout partners.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Health APIs</span>
+                        <span class="tag">Social Features</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 5-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 9 -->
+                <div class="problem-card reveal-animation" data-category="ai" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">09</span>
+                        <span class="problem-category">AI/ML</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Smart Document Scanner</h3>
+                    <p class="problem-description">
+                        Create an AI-powered tool that scans, processes, and extracts meaningful information from various document types.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">OCR</span>
+                        <span class="tag">Machine Learning</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problem 10 -->
+                <div class="problem-card reveal-animation" data-category="iot" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">10</span>
+                        <span class="problem-category">IoT</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Smart Home Dashboard</h3>
+                    <p class="problem-description">
+                        Design a central dashboard to monitor and control smart home devices with automation and energy optimization features.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Raspberry Pi</span>
+                        <span class="tag">Home Automation</span>
+                        <span class="tag">Dashboard</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Continue with Problems 11-30 -->
+                <div class="problem-card reveal-animation" data-category="web" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">11</span>
+                        <span class="problem-category">Web Development</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Real-time Collaboration Platform</h3>
+                    <p class="problem-description">
+                        Build a web platform for real-time collaboration with video conferencing, shared whiteboards, and project management tools.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">WebRTC</span>
+                        <span class="tag">Socket.io</span>
+                        <span class="tag">Canvas API</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="mobile" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">12</span>
+                        <span class="problem-category">Mobile Apps</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Local Business Directory</h3>
+                    <p class="problem-description">
+                        Create a mobile app to discover local businesses, read reviews, and connect with community services in your area.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Maps API</span>
+                        <span class="tag">GPS</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="ai" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">13</span>
+                        <span class="problem-category">AI/ML</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Personal Finance Assistant</h3>
+                    <p class="problem-description">
+                        Develop an AI assistant that helps users manage their finances, track expenses, and provide savings recommendations.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">Chatbot</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="blockchain" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">14</span>
+                        <span class="problem-category">Blockchain</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Supply Chain Tracker</h3>
+                    <p class="problem-description">
+                        Create a blockchain-based system to track products through the supply chain, ensuring transparency and authenticity.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Smart Contracts</span>
+                        <span class="tag">QR Codes</span>
+                        <span class="tag">Tracking</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="data" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">15</span>
+                        <span class="problem-category">Data Science</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Traffic Flow Optimizer</h3>
+                    <p class="problem-description">
+                        Analyze traffic patterns and create a system to optimize traffic flow and reduce congestion in urban areas.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Traffic Data</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Continue adding more problems... I'll add 15 more to reach 30 total -->
+                
+                <div class="problem-card reveal-animation" data-category="web" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">16</span>
+                        <span class="problem-category">Web Development</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Event Management Platform</h3>
+                    <p class="problem-description">
+                        Build a comprehensive platform for creating, managing, and promoting events with ticketing and attendee management.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Payment Gateway</span>
+                        <span class="tag">Email Integration</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="mobile" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">17</span>
+                        <span class="problem-category">Mobile Apps</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Language Learning Buddy</h3>
+                    <p class="problem-description">
+                        Create an interactive mobile app for language learning with speech recognition, gamification, and progress tracking.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Speech API</span>
+                        <span class="tag">Gamification</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="iot" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">18</span>
+                        <span class="problem-category">IoT</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Smart Agriculture Monitor</h3>
+                    <p class="problem-description">
+                        Develop an IoT system to monitor soil conditions, weather patterns, and crop health for precision agriculture.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Sensors</span>
+                        <span class="tag">Weather API</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="ai" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">19</span>
+                        <span class="problem-category">AI/ML</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Medical Diagnosis Assistant</h3>
+                    <p class="problem-description">
+                        Build an AI system that assists healthcare professionals in diagnosing medical conditions from symptoms and test results.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">Medical Data</span>
+                        <span class="tag">Expert System</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="web" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">20</span>
+                        <span class="problem-category">Web Development</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Online Learning Portal</h3>
+                    <p class="problem-description">
+                        Create a web platform for online courses with video lessons, quizzes, and progress tracking for students and educators.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Video Integration</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <!-- Problems 21-30 -->
+                <div class="problem-card reveal-animation" data-category="data" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">21</span>
+                        <span class="problem-category">Data Science</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Social Media Analytics</h3>
+                    <p class="problem-description">
+                        Analyze social media data to identify trends, sentiment, and engagement patterns for businesses and marketers.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">API Integration</span>
+                        <span class="tag">Visualization</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="blockchain" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">22</span>
+                        <span class="problem-category">Blockchain</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Digital Certificate Validator</h3>
+                    <p class="problem-description">
+                        Create a blockchain-based system for issuing and verifying digital certificates and credentials.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Smart Contracts</span>
+                        <span class="tag">Digital Signatures</span>
+                        <span class="tag">Verification</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 5-6 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="mobile" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">23</span>
+                        <span class="problem-category">Mobile Apps</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Emergency Response System</h3>
+                    <p class="problem-description">
+                        Develop a mobile app for emergency situations with location sharing, quick contacts, and real-time communication.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">GPS Tracking</span>
+                        <span class="tag">Real-time Chat</span>
+                        <span class="tag">Emergency APIs</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="ai" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">24</span>
+                        <span class="problem-category">AI/ML</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Content Recommendation Engine</h3>
+                    <p class="problem-description">
+                        Build an AI system that recommends personalized content based on user behavior and preferences.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Recommendation Systems</span>
+                        <span class="tag">User Analytics</span>
+                        <span class="tag">Machine Learning</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="iot" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">25</span>
+                        <span class="problem-category">IoT</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Smart Energy Monitor</h3>
+                    <p class="problem-description">
+                        Create an IoT device to monitor energy consumption and provide insights for reducing electricity bills.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Energy Sensors</span>
+                        <span class="tag">Data Analytics</span>
+                        <span class="tag">Mobile Dashboard</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 5-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="web" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">26</span>
+                        <span class="problem-category">Web Development</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Freelancer Marketplace</h3>
+                    <p class="problem-description">
+                        Build a platform connecting freelancers with clients, featuring project management, payments, and rating systems.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Full Stack</span>
+                        <span class="tag">Payment Integration</span>
+                        <span class="tag">User Management</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="data" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">27</span>
+                        <span class="problem-category">Data Science</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Stock Market Predictor</h3>
+                    <p class="problem-description">
+                        Analyze stock market data and create predictive models to forecast stock prices and market trends.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Time Series</span>
+                        <span class="tag">Financial Data</span>
+                        <span class="tag">Prediction Models</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="mobile" data-difficulty="easy">
+                    <div class="problem-header">
+                        <span class="problem-number">28</span>
+                        <span class="problem-category">Mobile Apps</span>
+                        <span class="difficulty-badge easy">Easy</span>
+                    </div>
+                    <h3 class="problem-title">Personal Journal App</h3>
+                    <p class="problem-description">
+                        Create a mobile journaling app with mood tracking, photo attachments, and privacy features.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Mobile Development</span>
+                        <span class="tag">Local Storage</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 4-5 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="ai" data-difficulty="medium">
+                    <div class="problem-header">
+                        <span class="problem-number">29</span>
+                        <span class="problem-category">AI/ML</span>
+                        <span class="difficulty-badge medium">Medium</span>
+                    </div>
+                    <h3 class="problem-title">Smart Shopping Assistant</h3>
+                    <p class="problem-description">
+                        Develop an AI assistant that helps users find the best deals, compare prices, and make informed purchasing decisions.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Price Comparison</span>
+                        <span class="tag">Web Scraping</span>
+                        <span class="tag">Recommendation Engine</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 6-7 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+                <div class="problem-card reveal-animation" data-category="blockchain" data-difficulty="hard">
+                    <div class="problem-header">
+                        <span class="problem-number">30</span>
+                        <span class="problem-category">Blockchain</span>
+                        <span class="difficulty-badge hard">Hard</span>
+                    </div>
+                    <h3 class="problem-title">Decentralized Social Network</h3>
+                    <p class="problem-description">
+                        Create a decentralized social media platform where users have complete control over their data and content.
+                    </p>
+                    <div class="problem-tags">
+                        <span class="tag">Decentralization</span>
+                        <span class="tag">IPFS</span>
+                        <span class="tag">Smart Contracts</span>
+                    </div>
+                    <div class="problem-footer">
+                        <span class="estimated-time">⏱️ 7-8 hours</span>
+                        <button class="select-btn">Select Problem</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="problems-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title reveal-animation">Ready to Take on the Challenge?</h2>
+                <p class="cta-description reveal-animation">
+                    Choose your problem statement and start building your solution. Remember, you have 8 hours to create something amazing!
+                </p>
+                <div class="cta-buttons reveal-animation">
+                    <a href="index.html#register" class="cta-button primary">
+                        <span class="btn-text">Register for Hackathon</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="index.html" class="cta-button secondary">
+                        <span class="btn-text">Back to Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2025 INFOMEISTER - CSE Association, INFO Institute of Engineering</p>
+                    <p>Crafted with ⚡ for innovation</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="index.html#about" class="footer-link">About</a>
+                    <a href="index.html#contact" class="footer-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="problem-script.js"></script>
+</body>
+</html>
