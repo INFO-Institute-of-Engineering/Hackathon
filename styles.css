@@ -46,7 +46,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
+    cursor: auto;
 }
 
 /* ===== CUSTOM CURSOR ===== */
@@ -86,14 +86,14 @@ body {
 }
 
 .reveal-animation {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all var(--transition-slow);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s, transform 0.6s;
 }
 
-.reveal-animation.revealed {
-    opacity: 1;
-    transform: translateY(0);
+.reveal-animation.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ===== NAVIGATION ===== */
@@ -195,6 +195,7 @@ body {
     position: relative;
     background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
     overflow: hidden;
+    padding-top: 80px; /* Account for fixed navbar */
 }
 
 .hero-content {
@@ -1219,4 +1220,30 @@ body {
     .cta-button {
         cursor: pointer;
     }
+    /* Remove prize card hover and scaling for mobile */
+    .prize-card,
+    .prize-card.winner {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: var(--tertiary-neon);
+        background: rgba(255, 255, 0, 0.05);
+    }
+    .prize-card:hover,
+    .prize-card.winner:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
 }
+    /* Remove prize card hover and scaling for mobile */
+    .prize-card,
+    .prize-card.winner {
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: var(--tertiary-neon);
+        background: rgba(255, 255, 0, 0.05);
+    }
+    .prize-card:hover,
+    .prize-card.winner:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }

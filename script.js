@@ -537,20 +537,20 @@ style.textContent = `
         }
     }
     
-    .nav-links.active {
+   .nav-links.active {
         display: flex !important;
         position: fixed;
         top: 70px;
         left: 0;
         width: 100%;
         height: calc(100vh - 70px);
-        background: rgba(0, 0, 0, 0.95);
+        background: rgba(0, 0, 0, 0.98);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 40px;
-        backdrop-filter: blur(10px);
-        z-index: 999;
+        backdrop-filter: blur(15px);
+        z-index: 1999;
     }
     
     .nav-links.active .nav-link {
@@ -650,3 +650,23 @@ if (typeof module !== 'undefined' && module.exports) {
         initializeTypingEffect
     };
 }
+// Add this to script.js
+function handleRevealAnimations() {
+  const reveals = document.querySelectorAll('.reveal-animation');
+  const windowHeight = window.innerHeight;
+  reveals.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 50) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+
+// Listen for scroll and touchmove events
+window.addEventListener('scroll', handleRevealAnimations);
+window.addEventListener('touchmove', handleRevealAnimations);
+
+// Initial trigger
+document.addEventListener('DOMContentLoaded', handleRevealAnimations);
