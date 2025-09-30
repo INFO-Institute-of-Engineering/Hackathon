@@ -201,7 +201,7 @@ body {
 .hero-content {
     text-align: center;
     z-index: 2;
-    max-width: 800px;
+    max-width: 820px;
     padding: 0 20px;
 }
 
@@ -219,7 +219,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
 }
 
 .typing-text::after {
