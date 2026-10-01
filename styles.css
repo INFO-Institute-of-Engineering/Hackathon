@@ -15,6 +15,22 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'KungFuMasterBoldItalic';
+    src: url('fonts/KungFuMasterBoldItalic.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'KungFuMasterBoldItalic';
+    src: url('fonts/KungFuMasterBoldItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ===== RESET & BASE STYLES ===== */
 * {
     margin: 0;

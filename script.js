@@ -1128,9 +1128,23 @@ function initializeInfomeisterDoorShatterIntro() {
 
     // Preload custom brand fonts
     if (document.fonts) {
+        document.fonts.load('italic 900 64px "KungFuMasterBoldItalic"').then(() => {
+            prepareTitleBuffer();
+        }).catch(() => { });
+        document.fonts.load('italic 900 64px "KungFuMaster"').then(() => {
+            prepareTitleBuffer();
+        }).catch(() => { });
+        document.fonts.load('900 64px "KungFuMasterBoldItalic"').then(() => {
+            prepareTitleBuffer();
+        }).catch(() => { });
         document.fonts.load('900 64px "KungFuMaster"').catch(() => { });
         document.fonts.load('900 64px "Orbitron"').catch(() => { });
         document.fonts.load('600 24px "Exo 2"').catch(() => { });
+        if (document.fonts.ready) {
+            document.fonts.ready.then(() => {
+                prepareTitleBuffer();
+            }).catch(() => { });
+        }
     }
 
     // ----------------------------------------------------------------------
@@ -1159,24 +1173,41 @@ function initializeInfomeisterDoorShatterIntro() {
     }
 
     // ----------------------------------------------------------------------
-    // OFFSCREEN TITLE RENDERING (Liquid Platinum + Dark Bevels)
+    // OFFSCREEN TITLE RENDERING (Authentic Brand Italic Ice-Cyan Chrome)
     // ----------------------------------------------------------------------
     let offTitle = null;
+    let offBadge = null;
     let titleW = 0;
     let titleH = 0;
+    let badgeW = 0;
+    let badgeH = 0;
     let titleFontSize = 48;
+
+    function drawSlantedChamferedBox(cCtx, x, y, w, h, c, skew) {
+        cCtx.beginPath();
+        cCtx.moveTo(x + c + skew, y);
+        cCtx.lineTo(x + w - c + skew, y);
+        cCtx.lineTo(x + w + (skew * 0.5), y + c);
+        cCtx.lineTo(x + w - skew, y + h - c);
+        cCtx.lineTo(x + w - c - skew, y + h);
+        cCtx.lineTo(x + c - skew, y + h);
+        cCtx.lineTo(x - skew, y + h - c);
+        cCtx.lineTo(x + (skew * 0.5), y + c);
+        cCtx.closePath();
+    }
 
     function prepareTitleBuffer() {
         titleFontSize = Math.max(22, Math.min(width * 0.052, 64));
-        const testFont = `900 ${titleFontSize}px 'KungFuMaster', 'Orbitron', 'Montserrat', sans-serif`;
+        const testFont = `italic 900 ${titleFontSize}px 'KungFuMasterBoldItalic', 'KungFuMaster', 'Orbitron', 'Montserrat', sans-serif`;
 
         const measureCanvas = document.createElement('canvas');
         const mCtx = measureCanvas.getContext('2d');
         mCtx.font = testFont;
-        const textMetrics = mCtx.measureText('TRISQUADATHON');
+        const totalTextW = mCtx.measureText('TRISQUADATHON').width;
 
-        titleW = Math.ceil(textMetrics.width + 40);
-        titleH = Math.ceil(titleFontSize * 1.7);
+        const titlePad = Math.ceil(Math.max(24, titleFontSize * 0.40));
+        titleW = Math.ceil(totalTextW + titlePad * 2);
+        titleH = Math.ceil(titleFontSize * 1.85);
 
         offTitle = document.createElement('canvas');
         offTitle.width = Math.max(1, Math.ceil(titleW * dpr));
@@ -1187,38 +1218,180 @@ function initializeInfomeisterDoorShatterIntro() {
         tCtx.scale(dpr, dpr);
 
         const tcx = titleW / 2;
-        const tcy = titleH / 2 + titleFontSize * 0.34;
+        const tcy = titleH / 2 + titleFontSize * 0.36;
 
         tCtx.font = testFont;
         tCtx.textAlign = 'center';
         tCtx.textBaseline = 'alphabetic';
 
-        // Dark Obsidian Drop Shadow
-        tCtx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+        // 1. Ambient Cyber Cyan Back-Glow behind letters
+        tCtx.save();
+        tCtx.shadowColor = 'rgba(0, 240, 255, 0.45)';
         tCtx.shadowBlur = 24;
-        tCtx.shadowOffsetY = 6;
-
-        tCtx.strokeStyle = '#050a12';
-        tCtx.lineWidth = Math.max(5, titleFontSize * 0.09);
+        tCtx.strokeStyle = 'rgba(0, 240, 255, 0.30)';
+        tCtx.lineWidth = Math.max(7, titleFontSize * 0.12);
         tCtx.strokeText('TRISQUADATHON', tcx, tcy);
+        tCtx.restore();
 
-        tCtx.shadowColor = 'transparent';
+        // 2. Dark Obsidian 3D Bevel Outline & Drop Shadow
+        tCtx.save();
+        tCtx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+        tCtx.shadowBlur = 18;
+        tCtx.shadowOffsetY = 6;
+        tCtx.strokeStyle = '#020b18';
+        tCtx.lineWidth = Math.max(5.5, titleFontSize * 0.10);
+        tCtx.strokeText('TRISQUADATHON', tcx, tcy);
+        tCtx.restore();
 
-        // Multi-Stop Liquid Platinum Gradient
-        const grad = tCtx.createLinearGradient(0, tcy - titleFontSize, 0, tcy + 4);
-        grad.addColorStop(0, '#ffffff');      // Blinding specular highlight
-        grad.addColorStop(0.22, '#f0f5fa');   // Liquid platinum
-        grad.addColorStop(0.48, '#a2b6cb');   // Brushed alloy
-        grad.addColorStop(0.52, '#3b4d60');   // Horizon shadow
-        grad.addColorStop(0.78, '#d6e4f3');   // Ground reflection
-        grad.addColorStop(1, '#798e9f');      // Deep bevel
-        tCtx.fillStyle = grad;
+        // Substring measurements for precise multi-tone letter fills
+        const xStart = tcx - totalTextW / 2;
+        const wTRIS = mCtx.measureText('TRIS').width;
+        const wTRISQ = mCtx.measureText('TRISQ').width;
+        const wTRISQUA = mCtx.measureText('TRISQUA').width;
+        const wTRISQUAD = mCtx.measureText('TRISQUAD').width;
+        const wTRISQUADA = mCtx.measureText('TRISQUADA').width;
+
+        // 3. Segment A: "TRIS" (Left Wing: Ice-White -> Electric Cyan -> Cyber Blue)
+        tCtx.save();
+        tCtx.beginPath();
+        tCtx.rect(xStart - 16, 0, wTRIS + 16, titleH);
+        tCtx.clip();
+
+        const gradTRIS = tCtx.createLinearGradient(0, tcy - titleFontSize, 0, tcy + 4);
+        gradTRIS.addColorStop(0.00, '#ffffff');      // Blinding ice-white top
+        gradTRIS.addColorStop(0.22, '#dcf8ff');      // Ice-cyan highlight
+        gradTRIS.addColorStop(0.52, '#00e5ff');      // Vibrant electric cyan
+        gradTRIS.addColorStop(0.82, '#0088ff');      // Deep cyber blue
+        gradTRIS.addColorStop(1.00, '#0055b3');      // Navy cyber base
+        tCtx.fillStyle = gradTRIS;
         tCtx.fillText('TRISQUADATHON', tcx, tcy);
 
-        // Specular Top Rim Line
-        tCtx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-        tCtx.lineWidth = 1.3;
+        tCtx.strokeStyle = 'rgba(255, 255, 255, 0.92)';
+        tCtx.lineWidth = 1.2;
         tCtx.strokeText('TRISQUADATHON', tcx, tcy);
+        tCtx.restore();
+
+        // 4. Segment B: "Q" (The Radiant Hero Accent: Pure Neon Cyan + Intense Glow)
+        tCtx.save();
+        tCtx.beginPath();
+        tCtx.rect(xStart + wTRIS - 2, 0, (wTRISQ - wTRIS) + 4, titleH);
+        tCtx.clip();
+
+        tCtx.shadowColor = '#00f0ff';
+        tCtx.shadowBlur = 22;
+        const gradQ = tCtx.createLinearGradient(0, tcy - titleFontSize, 0, tcy + 4);
+        gradQ.addColorStop(0.00, '#ffffff');         // White-hot core
+        gradQ.addColorStop(0.20, '#bbf7ff');         // Neon ice
+        gradQ.addColorStop(0.50, '#00f0ff');         // Pure electric cyan
+        gradQ.addColorStop(0.80, '#00b4d8');         // Rich cyan
+        gradQ.addColorStop(1.00, '#0077b6');         // Deep cyber teal base
+        tCtx.fillStyle = gradQ;
+        tCtx.fillText('TRISQUADATHON', tcx, tcy);
+
+        tCtx.shadowColor = 'transparent';
+        tCtx.strokeStyle = 'rgba(255, 255, 255, 0.98)';
+        tCtx.lineWidth = 1.4;
+        tCtx.strokeText('TRISQUADATHON', tcx, tcy);
+        tCtx.restore();
+
+        // 5. Segment C: "UADATHON" (Right Wing: Arctic White -> Ice Platinum -> Sky Cyan Base)
+        tCtx.save();
+        tCtx.beginPath();
+        tCtx.rect(xStart + wTRISQ - 2, 0, titleW - (xStart + wTRISQ), titleH);
+        tCtx.clip();
+
+        const gradUAD = tCtx.createLinearGradient(0, tcy - titleFontSize, 0, tcy + 4);
+        gradUAD.addColorStop(0.00, '#ffffff');       // Pure Arctic White top
+        gradUAD.addColorStop(0.32, '#f0faff');       // Ice platinum
+        gradUAD.addColorStop(0.62, '#ccefff');       // Sky ice tint
+        gradUAD.addColorStop(0.84, '#67cdfc');       // Vibrant cyan-blue reflection
+        gradUAD.addColorStop(1.00, '#027bbd');       // Ocean steel base
+        tCtx.fillStyle = gradUAD;
+        tCtx.fillText('TRISQUADATHON', tcx, tcy);
+
+        tCtx.strokeStyle = 'rgba(255, 255, 255, 0.90)';
+        tCtx.lineWidth = 1.2;
+        tCtx.strokeText('TRISQUADATHON', tcx, tcy);
+        tCtx.restore();
+
+        // 6. Signature Delta Chevron Accents on "A"s (From Official Brand Logo)
+        tCtx.save();
+        tCtx.fillStyle = '#00f0ff';
+        tCtx.shadowColor = '#00f0ff';
+        tCtx.shadowBlur = 12;
+
+        // Glowing Delta ▲ inside first A (SQUAD)
+        const xA1 = xStart + (wTRISQ + wTRISQUA) / 2;
+        const dSize = Math.max(3.5, titleFontSize * 0.13);
+        const dY1 = tcy - titleFontSize * 0.44;
+        tCtx.beginPath();
+        tCtx.moveTo(xA1, dY1 - dSize);
+        tCtx.lineTo(xA1 - dSize * 0.85, dY1 + dSize * 0.6);
+        tCtx.lineTo(xA1 + dSize * 0.85, dY1 + dSize * 0.6);
+        tCtx.closePath();
+        tCtx.fill();
+
+        // Glowing Inverted Delta ▼ below second A (ATHON)
+        const xA2 = xStart + (wTRISQUAD + wTRISQUADA) / 2;
+        const dY2 = tcy + titleFontSize * 0.16;
+        tCtx.beginPath();
+        tCtx.moveTo(xA2, dY2 + dSize);
+        tCtx.lineTo(xA2 - dSize * 0.85, dY2 - dSize * 0.6);
+        tCtx.lineTo(xA2 + dSize * 0.85, dY2 - dSize * 0.6);
+        tCtx.closePath();
+        tCtx.fill();
+        tCtx.restore();
+
+        // -------------------------------------------------------------
+        // PREPARE 2.0 BADGE BUFFER (Matching Slanted Ice-White & Cyan)
+        // -------------------------------------------------------------
+        const badgeFontSize = Math.max(16, Math.round(titleFontSize * 0.58));
+        const badgeFont = `italic 900 ${badgeFontSize}px 'KungFuMasterBoldItalic', 'KungFuMaster', 'Orbitron', 'Montserrat', sans-serif`;
+        mCtx.font = badgeFont;
+        const bMetrics = mCtx.measureText('2.0');
+
+        badgeW = Math.ceil(Math.max(bMetrics.width + 38, titleFontSize * 1.20));
+        badgeH = Math.ceil(Math.max(34, titleFontSize * 0.66));
+
+        offBadge = document.createElement('canvas');
+        offBadge.width = Math.max(1, Math.ceil(badgeW * dpr));
+        offBadge.height = Math.max(1, Math.ceil(badgeH * dpr));
+
+        const bCtx = offBadge.getContext('2d');
+        if (!bCtx) return;
+        bCtx.scale(dpr, dpr);
+
+        const bcx = badgeW / 2;
+        const bcy = badgeH / 2 + badgeFontSize * 0.34;
+
+        bCtx.font = badgeFont;
+        bCtx.textAlign = 'center';
+        bCtx.textBaseline = 'alphabetic';
+
+        // Deep Obsidian Shadow & Bevel Stroke
+        bCtx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+        bCtx.shadowBlur = 18;
+        bCtx.shadowOffsetY = 4;
+        bCtx.strokeStyle = '#020b18';
+        bCtx.lineWidth = Math.max(4.5, badgeFontSize * 0.12);
+        bCtx.strokeText('2.0', bcx, bcy);
+
+        bCtx.shadowColor = 'transparent';
+
+        // Electric Cyan & Ice White Chrome Gradient
+        const bGrad = bCtx.createLinearGradient(0, bcy - badgeFontSize, 0, bcy + 4);
+        bGrad.addColorStop(0.00, '#ffffff');      // Blinding ice-white top
+        bGrad.addColorStop(0.22, '#dcf8ff');      // Ice-cyan highlight
+        bGrad.addColorStop(0.52, '#00e5ff');      // Vibrant electric cyan
+        bGrad.addColorStop(0.82, '#0088ff');      // Deep cyber blue
+        bGrad.addColorStop(1.00, '#0055b3');      // Navy cyber base
+        bCtx.fillStyle = bGrad;
+        bCtx.fillText('2.0', bcx, bcy);
+
+        // Specular Top Rim Line
+        bCtx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
+        bCtx.lineWidth = 1.2;
+        bCtx.strokeText('2.0', bcx, bcy);
     }
 
     // ----------------------------------------------------------------------
@@ -1682,129 +1855,246 @@ function initializeInfomeisterDoorShatterIntro() {
             const easeReveal = easeOutQuart(revealProg);
             const titleScale = 0.92 + 0.08 * easeReveal;
 
-            // Group Width Calculation
-            const badgeW = Math.max(56, titleFontSize * 1.15);
-            const badgeH = Math.max(30, titleFontSize * 0.58);
-            const gap = Math.max(18, titleFontSize * 0.28);
+            ctx.save();
+            ctx.globalAlpha = Math.min(1, revealT / 0.45);
+
+            // Group Width Calculation (using precomputed titleW and badgeW)
+            const gap = Math.max(14, titleFontSize * 0.22);
             const totalGroupW = titleW + gap + badgeW;
 
             const groupLeftX = cx - totalGroupW / 2;
             const titlePosX = groupLeftX;
-            const titlePosY = cy - titleH / 2 + 35;
+            const titlePosY = cy - titleH / 2 + 25;
             const badgeX = groupLeftX + titleW + gap;
-            const badgeY = cy - badgeH / 2 + 35;
+            const badgeY = cy - badgeH / 2 + 25;
 
-            ctx.save();
-            ctx.globalAlpha = Math.min(1, revealT / 0.45);
+            // -------------------------------------------------------------
+            // TOP ANAMORPHIC OPTICAL FLARE (Matches Official Banner Apex)
+            // -------------------------------------------------------------
+            const flareY = titlePosY - 12;
+            const flareW = Math.min(width * 0.95, totalGroupW * 1.30);
+            const flarePulse = 0.88 + 0.12 * Math.sin((T - 4.10) * 3.5);
 
-            // Anamorphic Horizontal Laser Flare behind Title
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
-            const flareW = width * 1.15;
-            const flareGrad = ctx.createLinearGradient(cx - flareW / 2, 0, cx + flareW / 2, 0);
-            flareGrad.addColorStop(0, 'rgba(0, 119, 255, 0)');
-            flareGrad.addColorStop(0.3, 'rgba(0, 240, 255, 0.45)');
-            flareGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.95)');
-            flareGrad.addColorStop(0.7, 'rgba(0, 240, 255, 0.45)');
-            flareGrad.addColorStop(1, 'rgba(0, 119, 255, 0)');
 
-            ctx.strokeStyle = flareGrad;
-            ctx.lineWidth = 3;
-            ctx.shadowColor = C_CYAN;
-            ctx.shadowBlur = 24;
+            // Horizontal Cyan-White Laser Flare
+            const hBeamGrad = ctx.createLinearGradient(cx - flareW / 2, 0, cx + flareW / 2, 0);
+            hBeamGrad.addColorStop(0.00, 'rgba(0, 119, 255, 0)');
+            hBeamGrad.addColorStop(0.28, 'rgba(0, 240, 255, 0.35)');
+            hBeamGrad.addColorStop(0.48, 'rgba(200, 245, 255, 0.85)');
+            hBeamGrad.addColorStop(0.50, 'rgba(255, 255, 255, 1.0)');
+            hBeamGrad.addColorStop(0.52, 'rgba(200, 245, 255, 0.85)');
+            hBeamGrad.addColorStop(0.72, 'rgba(0, 240, 255, 0.35)');
+            hBeamGrad.addColorStop(1.00, 'rgba(0, 119, 255, 0)');
+
+            ctx.strokeStyle = hBeamGrad;
+            ctx.lineWidth = 2.5 * flarePulse;
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 20 * flarePulse;
             ctx.beginPath();
-            ctx.moveTo(cx - flareW / 2, titlePosY + titleH * 0.5);
-            ctx.lineTo(cx + flareW / 2, titlePosY + titleH * 0.5);
+            ctx.moveTo(cx - flareW / 2, flareY);
+            ctx.lineTo(cx + flareW / 2, flareY);
             ctx.stroke();
+
+            // Central Brilliant Radial Corona
+            const coronaR = Math.max(18, titleFontSize * 0.55);
+            const rCorona = ctx.createRadialGradient(cx, flareY, 1, cx, flareY, coronaR);
+            rCorona.addColorStop(0.00, 'rgba(255, 255, 255, 1.0)');
+            rCorona.addColorStop(0.25, 'rgba(0, 240, 255, 0.85)');
+            rCorona.addColorStop(0.60, 'rgba(0, 120, 255, 0.35)');
+            rCorona.addColorStop(1.00, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = rCorona;
+            ctx.beginPath();
+            ctx.arc(cx, flareY, coronaR, 0, Math.PI * 2);
+            ctx.fill();
             ctx.restore();
 
-            // Authoritative Brand Header: "INFOMEISTER PRESENTS"
+            // Authoritative Brand Header: "INFOMEISTER PRESENTS" with Liquid Cyan-Ice Gradient
             ctx.save();
-            ctx.font = `800 ${Math.max(12, Math.min(width * 0.016, 16))}px 'Orbitron', 'Exo 2', sans-serif`;
+            const headerSize = Math.max(12, Math.min(width * 0.016, 16));
+            ctx.font = `800 ${headerSize}px 'Orbitron', 'Exo 2', sans-serif`;
             ctx.letterSpacing = isMobile ? '4px' : '8px';
             ctx.textAlign = 'center';
-            ctx.fillStyle = C_CYAN;
+            const hGrad = ctx.createLinearGradient(0, titlePosY - 40 - headerSize, 0, titlePosY - 40);
+            hGrad.addColorStop(0, '#ffffff');
+            hGrad.addColorStop(0.35, '#c8f7ff');
+            hGrad.addColorStop(1, C_CYAN);
+            ctx.fillStyle = hGrad;
             ctx.shadowColor = C_CYAN;
-            ctx.shadowBlur = 12;
-            ctx.fillText('INFOMEISTER PRESENTS', cx, titlePosY - 36);
+            ctx.shadowBlur = 14;
+            ctx.fillText('INFOMEISTER PRESENTS', cx, titlePosY - 40);
             ctx.restore();
 
-            // Scale & Render Main Title: TRISQUADATHON
+            // Scale & Render Main Title & 2.0 Emblem
             ctx.save();
             ctx.translate(cx, titlePosY + titleH / 2);
             ctx.scale(titleScale, titleScale);
             ctx.translate(-cx, -(titlePosY + titleH / 2));
 
-            // Liquid Platinum TRISQUADATHON
-            ctx.drawImage(offTitle, 0, 0, titleW * dpr, titleH * dpr, titlePosX, titlePosY, titleW, titleH);
+            // Liquid Platinum & Cyan TRISQUADATHON
+            if (offTitle) {
+                ctx.drawImage(offTitle, 0, 0, titleW * dpr, titleH * dpr, titlePosX, titlePosY, titleW, titleH);
+            }
 
-            // Sculpted 2.0 Emblem in Sapphire & Platinum
+            // Slanted Cybernetic Chassis with Forward Angle Matching the Italic Letters
+            const chamfer = Math.max(5, badgeH * 0.22);
+            const skew = Math.round(badgeH * 0.20);
+            const bPulse = 0.82 + 0.18 * Math.sin((T - 4.10) * 4.2);
+
             ctx.save();
-            ctx.beginPath();
-            if (ctx.roundRect) ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 8);
-            else ctx.rect(badgeX, badgeY, badgeW, badgeH);
-
-            const bFill = ctx.createLinearGradient(badgeX, badgeY, badgeX, badgeY + badgeH);
-            bFill.addColorStop(0, '#102238');
-            bFill.addColorStop(1, '#050c16');
-            ctx.fillStyle = bFill;
+            // 1. Soft Ambient Cyan Aura / Backlight Glow
+            ctx.shadowColor = C_CYAN;
+            ctx.shadowBlur = 18 * bPulse;
+            drawSlantedChamferedBox(ctx, badgeX, badgeY, badgeW, badgeH, chamfer, skew);
+            const bBg = ctx.createLinearGradient(badgeX, badgeY, badgeX, badgeY + badgeH);
+            bBg.addColorStop(0, '#091c32');
+            bBg.addColorStop(0.5, '#040d1a');
+            bBg.addColorStop(1, '#02060e');
+            ctx.fillStyle = bBg;
             ctx.fill();
 
-            // Electric Cyan Glowing Rim
-            ctx.shadowColor = C_CYAN;
-            ctx.shadowBlur = 14;
+            // 2. High-Tech Thin Hairline Rim
+            ctx.shadowBlur = 0;
+            ctx.strokeStyle = `rgba(0, 180, 255, ${0.35 * bPulse})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // 3. Electric Cyan Cyber Corner Brackets [ 2.0 ]
+            const bLen = Math.max(6, chamfer * 1.4);
             ctx.strokeStyle = C_CYAN;
             ctx.lineWidth = 2.0;
-            ctx.stroke();
-            ctx.shadowBlur = 0;
+            ctx.shadowColor = C_CYAN;
+            ctx.shadowBlur = 12 * bPulse;
 
-            // "2.0" Typography in Pure Laser White
-            ctx.font = `900 ${Math.max(16, badgeH * 0.56)}px 'Orbitron', 'Exo 2', sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillStyle = '#ffffff';
-            ctx.fillText('2.0', badgeX + badgeW / 2, badgeY + badgeH / 2 + 1);
+            // Top-Left L-bracket
+            ctx.beginPath();
+            ctx.moveTo(badgeX + (skew * 0.5), badgeY + chamfer + bLen);
+            ctx.lineTo(badgeX + (skew * 0.5), badgeY + chamfer);
+            ctx.lineTo(badgeX + chamfer + skew, badgeY);
+            ctx.lineTo(badgeX + chamfer + bLen + skew, badgeY);
+            ctx.stroke();
+
+            // Top-Right L-bracket
+            ctx.beginPath();
+            ctx.moveTo(badgeX + badgeW - chamfer - bLen + skew, badgeY);
+            ctx.lineTo(badgeX + badgeW - chamfer + skew, badgeY);
+            ctx.lineTo(badgeX + badgeW + (skew * 0.5), badgeY + chamfer);
+            ctx.lineTo(badgeX + badgeW + (skew * 0.5), badgeY + chamfer + bLen);
+            ctx.stroke();
+
+            // Bottom-Right L-bracket
+            ctx.beginPath();
+            ctx.moveTo(badgeX + badgeW - skew, badgeY + badgeH - chamfer - bLen);
+            ctx.lineTo(badgeX + badgeW - skew, badgeY + badgeH - chamfer);
+            ctx.lineTo(badgeX + badgeW - chamfer - skew, badgeY + badgeH);
+            ctx.lineTo(badgeX + badgeW - chamfer - bLen - skew, badgeY + badgeH);
+            ctx.stroke();
+
+            // Bottom-Left L-bracket
+            ctx.beginPath();
+            ctx.moveTo(badgeX + chamfer + bLen - skew, badgeY + badgeH);
+            ctx.lineTo(badgeX + chamfer - skew, badgeY + badgeH);
+            ctx.lineTo(badgeX - skew, badgeY + badgeH - chamfer);
+            ctx.lineTo(badgeX - skew, badgeY + badgeH - chamfer - bLen);
+            ctx.stroke();
             ctx.restore();
 
-            // Specular Light Glint Sweep across Title (4.6s -> 7.0s)
+            // Draw Liquid Platinum & Cyan Chrome 2.0 Typography
+            if (offBadge) {
+                ctx.drawImage(offBadge, 0, 0, badgeW * dpr, badgeH * dpr, badgeX, badgeY, badgeW, badgeH);
+            }
+
+            // Specular Light Glint Sweep across both TRISQUADATHON and 2.0 (4.6s -> 7.0s)
             if (T >= 4.60 && T <= 7.0) {
                 const glintProg = (T - 4.60) / 2.3;
                 const glintX = groupLeftX - 60 + glintProg * (totalGroupW + 120);
 
                 ctx.save();
                 ctx.beginPath();
-                ctx.rect(titlePosX, titlePosY - 10, totalGroupW + 20, titleH + 20);
+                ctx.rect(titlePosX - 4, titlePosY - 10, totalGroupW + 28, Math.max(titleH, badgeH) + 20);
                 ctx.clip();
 
                 const glintGrad = ctx.createLinearGradient(glintX - 50, 0, glintX + 50, 0);
                 glintGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-                glintGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
+                glintGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.92)');
                 glintGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
                 ctx.fillStyle = glintGrad;
-                ctx.fillRect(glintX - 50, titlePosY - 10, 100, titleH + 20);
+                ctx.fillRect(glintX - 50, titlePosY - 10, 100, Math.max(titleH, badgeH) + 20);
                 ctx.restore();
             }
 
             ctx.restore();
 
+            // -------------------------------------------------------------
+            // SUBTITLE BANNER: "—— IDEAS / CODE / IMPACT ——" (From Brand Logo)
+            // -------------------------------------------------------------
+            const subY = titlePosY + titleH + (isMobile ? 22 : 28);
+            const subFontSize = Math.max(9, Math.min(width * 0.013, 13));
+            ctx.save();
+            ctx.font = `700 ${subFontSize}px 'Orbitron', 'Exo 2', sans-serif`;
+            ctx.letterSpacing = isMobile ? '3.5px' : '6.5px';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            const subText = 'IDEAS   /   CODE   /   IMPACT';
+            const subMetrics = ctx.measureText(subText);
+            const subTextW = subMetrics.width;
+
+            // Render Subtitle Text in Luminous White with Soft Cyan Glow
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(subText, cx, subY);
+
+            // Progressive Laser Divider Rays extending Left & Right (Phase 4)
+            const rayProg = T >= 4.40 ? Math.min(1, (T - 4.40) / 0.55) : 0;
+            const fullRayLen = isMobile ? Math.max(30, width * 0.10) : Math.max(60, width * 0.14);
+            const rayLen = fullRayLen * rayProg;
+            const rayGap = isMobile ? 12 : 20;
+
+            if (rayProg > 0) {
+                // Left Laser Ray (fading to outer left)
+                const leftGrad = ctx.createLinearGradient(cx - subTextW / 2 - rayGap - rayLen, 0, cx - subTextW / 2 - rayGap, 0);
+                leftGrad.addColorStop(0, 'rgba(0, 140, 255, 0)');
+                leftGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.45)');
+                leftGrad.addColorStop(1, 'rgba(0, 240, 255, 0.95)');
+                ctx.strokeStyle = leftGrad;
+                ctx.lineWidth = 1.8;
+                ctx.shadowColor = '#00f0ff';
+                ctx.shadowBlur = 12;
+                ctx.beginPath();
+                ctx.moveTo(cx - subTextW / 2 - rayGap - rayLen, subY);
+                ctx.lineTo(cx - subTextW / 2 - rayGap, subY);
+                ctx.stroke();
+
+                // Right Laser Ray (fading to outer right)
+                const rightGrad = ctx.createLinearGradient(cx + subTextW / 2 + rayGap, 0, cx + subTextW / 2 + rayGap + rayLen, 0);
+                rightGrad.addColorStop(0, 'rgba(0, 240, 255, 0.95)');
+                rightGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.45)');
+                rightGrad.addColorStop(1, 'rgba(0, 140, 255, 0)');
+                ctx.strokeStyle = rightGrad;
+                ctx.lineWidth = 1.8;
+                ctx.shadowColor = '#00f0ff';
+                ctx.shadowBlur = 12;
+                ctx.beginPath();
+                ctx.moveTo(cx + subTextW / 2 + rayGap, subY);
+                ctx.lineTo(cx + subTextW / 2 + rayGap + rayLen, subY);
+                ctx.stroke();
+            }
+            ctx.restore();
+
             // Bottom Subtitle and Department Honorifics
             ctx.save();
             ctx.textAlign = 'center';
+            const deptY = subY + (isMobile ? 22 : 28);
             if (isMobile) {
                 // 2 Stacked Lines for Clean Mobile Fit
                 ctx.font = `600 ${Math.max(8.5, Math.min(width * 0.026, 11))}px 'Orbitron', 'Exo 2', sans-serif`;
                 ctx.letterSpacing = '1.8px';
                 ctx.fillStyle = 'rgba(220, 240, 255, 0.95)';
-                ctx.fillText('DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING', cx, titlePosY + titleH + 24);
-                ctx.fillText('INFO INSTITUTE OF ENGINEERING', cx, titlePosY + titleH + 39);
-
-                // Divider Ray
-                ctx.strokeStyle = 'rgba(0, 240, 255, 0.45)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(cx - 100, titlePosY + titleH + 48);
-                ctx.lineTo(cx + 100, titlePosY + titleH + 48);
-                ctx.stroke();
+                ctx.fillText('DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING', cx, deptY);
+                ctx.fillText('INFO INSTITUTE OF ENGINEERING', cx, deptY + 15);
 
                 // Hackathon Challenge Descriptor
                 ctx.font = `700 ${Math.max(8.5, Math.min(width * 0.024, 10.5))}px 'Orbitron', sans-serif`;
@@ -1812,21 +2102,13 @@ function initializeInfomeisterDoorShatterIntro() {
                 ctx.fillStyle = C_GOLD;
                 ctx.shadowColor = C_GOLD;
                 ctx.shadowBlur = 8;
-                ctx.fillText('8 HOURS NATIONAL LEVEL HACKATHON', cx, titlePosY + titleH + 62);
+                ctx.fillText('8 HOURS NATIONAL LEVEL HACKATHON', cx, deptY + 34);
             } else {
                 // Desktop Widescreen Layout
                 ctx.font = `600 ${Math.max(10, Math.min(width * 0.013, 12.5))}px 'Orbitron', 'Exo 2', sans-serif`;
                 ctx.letterSpacing = '3.5px';
                 ctx.fillStyle = 'rgba(220, 240, 255, 0.95)';
-                ctx.fillText('DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING • INFO INSTITUTE OF ENGINEERING', cx, titlePosY + titleH + 26);
-
-                // Divider Ray
-                ctx.strokeStyle = 'rgba(0, 240, 255, 0.45)';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(cx - 180, titlePosY + titleH + 34);
-                ctx.lineTo(cx + 180, titlePosY + titleH + 34);
-                ctx.stroke();
+                ctx.fillText('DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING • INFO INSTITUTE OF ENGINEERING', cx, deptY);
 
                 // Hackathon Challenge Descriptor
                 ctx.font = `700 ${Math.max(9.5, Math.min(width * 0.0125, 12))}px 'Orbitron', sans-serif`;
@@ -1834,7 +2116,7 @@ function initializeInfomeisterDoorShatterIntro() {
                 ctx.fillStyle = C_GOLD;
                 ctx.shadowColor = C_GOLD;
                 ctx.shadowBlur = 8;
-                ctx.fillText('8 HOURS NATIONAL LEVEL HACKATHON', cx, titlePosY + titleH + 48);
+                ctx.fillText('8 HOURS NATIONAL LEVEL HACKATHON', cx, deptY + 22);
             }
             ctx.restore();
 
