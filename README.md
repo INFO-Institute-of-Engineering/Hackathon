@@ -1,6 +1,6 @@
-# INFOMEISTER Hackathon 2025 🚀
+# INFOMEISTER Hackathon 2026 🚀
 
-A visually striking, highly animated, mobile-responsive landing page for the INFOMEISTER Hackathon 2025 organized by the CSE Association Club of INFO Institute of Engineering.
+A visually striking, highly animated, mobile-responsive landing page for the INFOMEISTER Hackathon 2026 organized by the CSE Association Club of INFO Institute of Engineering.
 
 ## ✨ Features
 
@@ -81,14 +81,14 @@ Then open: `http://localhost:8000`
 
 ## 📋 Event Details
 
-- **Event**: INFOMEISTER Hackathon 2025
-- **Duration**: 8 hours
+- **Event**: TRISQUADATHON 2.0 (INFOMEISTER Hackathon 2026)
+- **Duration**: 8 Hours National Level Hackathon
 - **Organizer**: CSE Association, INFO Institute of Engineering
 
 ### Competition Rounds:
-1. **Round 1**: BRD Documentation (20-26 Sept, Results: 28 Sept)
-2. **Round 2**: UI/UX Design (29 Sept - 4 Oct, Results: 7 Oct)
-3. **Round 3**: Coding & Presentation (7-16 Oct, Results: 17 Oct)
+1. **Round 1**: BRD Documentation (01-12 Oct, Results: 13 Oct)
+2. **Round 2**: UI/UX Design or Prototype (14-21 Oct, Results: 22 Oct)
+3. **Round 3**: Coding & Presentation (Grand Finale: 28 Oct)
 
 ### Prizes:
 - 🏆 **1st Prize**: ₹10,000
@@ -161,7 +161,7 @@ The landing page is specifically optimized for mobile devices with:
 
 ## 📄 License
 
-This project is created for the INFOMEISTER Hackathon 2025. Feel free to use and modify for educational purposes.
+This project is created for the INFOMEISTER Hackathon 2026. Feel free to use and modify for educational purposes.
 
 ## 🤝 Contributing
 
@@ -182,7 +182,7 @@ This is a hackathon landing page template. Feel free to:
 ## 🎯 Event Details
 
 ### Hackathon Structure
-- **Duration**: 8 Hours of intensive coding
+- **Duration**: 8 Hours National Level Hackathon
 - **Rounds**: 3 competitive rounds
   1. **Round 1**: Ideation & Planning
   2. **Round 2**: Development Phase
@@ -333,15 +333,16 @@ This project is open source and available under the [MIT License](LICENSE).
 
 For queries related to the hackathon:
 - **Organization**: CSE Association Club, INFO Institute of Engineering
+- **Contact**: +91 79043 88952
 - **Website**: [Registration Link - External Form]
 
 ## 🎉 Credits
 
-**INFOMEISTER Hackathon 2025**
+**INFOMEISTER Hackathon 2026**
 - **Organizer**: CSE Association Club
 - **Institution**: INFO Institute of Engineering
 - **Target Audience**: Tech-savvy developers and innovators
 
 ---
 
-**Ready to code your future? Join INFOMEISTER Hackathon 2025! 🚀**
+**Ready to code your future? Join INFOMEISTER Hackathon 2026! 🚀**

@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeProblemSelection();
     initializeSearchFunctionality();
     initializeProblemAnimations();
+    if (typeof initializeTypingEffect === 'function') {
+        initializeTypingEffect();
+    }
 });
 
 // ===== FILTER FUNCTIONALITY =====
@@ -30,31 +33,33 @@ function initializeProblemFilters() {
 }
 
 function filterProblems(filterValue, problemCards) {
+    let matchIndex = 0;
+
     problemCards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
+        const badge = card.querySelector('.problem-category');
+        const badgeText = badge ? badge.textContent.trim().toLowerCase() : '';
         
-        // Add filtering class for animation
-        card.classList.add('filtering');
+        const isMatch = (filterValue === 'all') ||
+            (filterValue === 'web' && (cardCategory === 'web' || badgeText.includes('full stack') || badgeText.includes('web'))) ||
+            (filterValue === 'iot' && (cardCategory === 'iot' || badgeText.includes('iot'))) ||
+            (filterValue === 'ai' && (cardCategory === 'ai' || badgeText === 'ai')) ||
+            (cardCategory === filterValue);
         
-        if (filterValue === 'all' || cardCategory === filterValue) {
-            // Show card
+        if (isMatch) {
+            const delay = Math.min(matchIndex * 25, 250);
+            matchIndex++;
+            card.classList.remove('hidden', 'fade-out');
             setTimeout(() => {
-                card.classList.remove('hidden', 'fade-out');
                 card.classList.add('fade-in');
-            }, 100);
+            }, delay);
         } else {
-            // Hide card
             card.classList.add('fade-out');
+            card.classList.remove('fade-in');
             setTimeout(() => {
                 card.classList.add('hidden');
-                card.classList.remove('fade-in');
-            }, 400);
+            }, 280);
         }
-        
-        // Remove filtering class after animation
-        setTimeout(() => {
-            card.classList.remove('filtering');
-        }, 500);
     });
     
     // Update results count
@@ -64,7 +69,13 @@ function filterProblems(filterValue, problemCards) {
 function updateResultsCount(filterValue, problemCards) {
     const visibleCards = Array.from(problemCards).filter(card => {
         const cardCategory = card.getAttribute('data-category');
-        return filterValue === 'all' || cardCategory === filterValue;
+        const badge = card.querySelector('.problem-category');
+        const badgeText = badge ? badge.textContent.trim().toLowerCase() : '';
+        return (filterValue === 'all') ||
+            (filterValue === 'web' && (cardCategory === 'web' || badgeText.includes('full stack') || badgeText.includes('web'))) ||
+            (filterValue === 'iot' && (cardCategory === 'iot' || badgeText.includes('iot'))) ||
+            (filterValue === 'ai' && (cardCategory === 'ai' || badgeText === 'ai')) ||
+            (cardCategory === filterValue);
     });
     
     // You can add a results counter here if needed
@@ -208,16 +219,28 @@ function createSearchBox() {
 }
 
 function handleSearch(e) {
-    const searchTerm = e.target.value.toLowerCase();
+    const rawSearch = e.target.value.toLowerCase().trim();
+    const searchTerm = rawSearch.replace(/comming/g, 'coming');
     const problemCards = document.querySelectorAll('.problem-card');
     
     problemCards.forEach(card => {
-        const title = card.querySelector('.problem-title').textContent.toLowerCase();
-        const description = card.querySelector('.problem-description').textContent.toLowerCase();
+        const titleEl = card.querySelector('.problem-title');
+        const descEl = card.querySelector('.problem-description');
+        const numEl = card.querySelector('.problem-number');
+        const catEl = card.querySelector('.problem-category');
+        
+        const title = titleEl ? titleEl.textContent.toLowerCase() : '';
+        const description = descEl ? descEl.textContent.toLowerCase() : '';
+        const number = numEl ? numEl.textContent.toLowerCase() : '';
+        const category = catEl ? catEl.textContent.toLowerCase() : '';
         const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
         
         const matchesSearch = title.includes(searchTerm) || 
+                            title.includes(rawSearch) ||
                             description.includes(searchTerm) || 
+                            description.includes(rawSearch) ||
+                            number.includes(rawSearch) ||
+                            category.includes(rawSearch) ||
                             tags.some(tag => tag.includes(searchTerm));
         
         if (matchesSearch) {
@@ -230,6 +253,7 @@ function handleSearch(e) {
     });
 }
 
+
 // ===== PROBLEM ANIMATIONS =====
 function initializeProblemAnimations() {
     // Stagger animation for problem cards
@@ -240,7 +264,8 @@ function initializeProblemAnimations() {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('animate-in');
-                }, index * 100);
+                }, Math.min(index * 60, 400));
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
@@ -255,25 +280,64 @@ function initializeProblemAnimations() {
 
 function addHoverEffects() {
     const problemCards = document.querySelectorAll('.problem-card');
-    
+    if (!problemCards.length) return;
+
+    const isTouch = window.innerWidth < 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
     problemCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            // Add magnetic effect
-            card.style.transform = 'translateY(-8px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            // Reset transform
-            card.style.transform = 'translateY(0) scale(1)';
-        });
-        
-        // Add click ripple effect
+        // Tag category theme for styling
+        const badge = card.querySelector('.problem-category');
+        const text = badge ? badge.textContent.trim().toLowerCase() : '';
+        if (text === 'ai' || card.getAttribute('data-category') === 'ai') {
+            card.setAttribute('data-theme', 'ai');
+        } else if (text.includes('iot') || card.getAttribute('data-category') === 'iot') {
+            card.setAttribute('data-theme', 'iot');
+        } else if (text.includes('stack') || text.includes('web') || card.getAttribute('data-category') === 'web') {
+            card.setAttribute('data-theme', 'web');
+        }
+
+        // On touch screens, let CSS transitions handle hover/active smoothly without pointer tracking overhead
+        if (!isTouch) {
+            let isHovered = false;
+
+            card.addEventListener('mouseenter', () => {
+                isHovered = true;
+                card.style.transition = 'transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                if (!isHovered) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const percentX = (x / rect.width) * 2 - 1;
+                const percentY = (y / rect.height) * 2 - 1;
+
+                // Comfortable 3D tilt max 8 degrees
+                const maxTilt = 8;
+                const tiltX = -percentY * maxTilt;
+                const tiltY = percentX * maxTilt;
+
+                card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-8px) scale3d(1.02, 1.02, 1.02)`;
+                card.style.setProperty('--mouse-x', `${((x / rect.width) * 100).toFixed(1)}%`);
+                card.style.setProperty('--mouse-y', `${((y / rect.height) * 100).toFixed(1)}%`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                isHovered = false;
+                card.style.transition = 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
+            });
+        }
+
+        // Smooth click ripple effect
         card.addEventListener('click', (e) => {
-            if (e.target.closest('.select-btn')) return; // Don't add ripple if clicking select button
+            if (e.target.closest('.select-btn')) return;
             
             const ripple = document.createElement('span');
             const rect = card.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
+            const size = Math.max(rect.width, rect.height) * 1.5;
             const x = e.clientX - rect.left - size / 2;
             const y = e.clientY - rect.top - size / 2;
             
@@ -283,16 +347,15 @@ function addHoverEffects() {
                 height: ${size}px;
                 left: ${x}px;
                 top: ${y}px;
-                background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(var(--card-theme-rgb, 0, 240, 255), 0.25) 0%, transparent 70%);
                 border-radius: 50%;
                 transform: scale(0);
-                animation: ripple 0.6s ease-out;
+                animation: cardRipple 0.6s cubic-bezier(0.16, 1, 0.3, 1);
                 pointer-events: none;
-                z-index: 1;
+                z-index: 6;
             `;
             
             card.appendChild(ripple);
-            
             setTimeout(() => {
                 ripple.remove();
             }, 600);
@@ -471,3 +534,15 @@ if (typeof module !== 'undefined' && module.exports) {
         clearSelection
     };
 }
+// Track navigation back to Home so clicking Home or logo skips intro
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link) {
+        const href = link.getAttribute('href') || '';
+        if (href === 'index.html' || href.startsWith('index.html#')) {
+            try {
+                sessionStorage.setItem('trisquadathon_skip_intro_nav', 'true');
+            } catch (err) {}
+        }
+    }
+}, true);
