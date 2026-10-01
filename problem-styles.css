@@ -1,13 +1,30 @@
 /* ===== PROBLEM STATEMENTS PAGE STYLES ===== */
 
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Logo link styling */
 .logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     text-decoration: none;
-    color: inherit;
+    color: #ffffff;
 }
 
 .logo-link:hover .glow-text {
-    text-shadow: 0 0 15px var(--primary-neon), 0 0 25px var(--primary-neon), 0 0 35px var(--primary-neon);
+    text-shadow: 0 0 15px #00ffff, 0 0 32px #00f0ff, 0 0 60px rgba(0, 240, 255, 1), 0 0 100px rgba(0, 240, 255, 0.8);
 }
 
 /* ===== PROBLEMS HERO SECTION ===== */
@@ -16,7 +33,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+    background: transparent;
     position: relative;
     padding-top: 100px;
 }
@@ -33,6 +50,106 @@
     font-weight: 900;
     margin-bottom: 20px;
     line-height: 1.1;
+}
+
+.problems-hero .typing-text {
+    background: linear-gradient(135deg, #00f5ff 0%, #ffffff 50%, #ff007f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
+    display: inline-block;
+    min-height: 1.2em;
+    position: relative;
+}
+
+.problems-hero .typing-text::after,
+.problems-hero .typing-text.typing-active::after,
+.problems-hero .typing-text.typing-complete::after {
+    content: '' !important;
+    display: inline-block !important;
+    width: 0.12em !important;
+    min-width: 5px !important;
+    max-width: 8px !important;
+    height: 0.88em !important;
+    margin-left: 8px !important;
+    vertical-align: -0.06em !important;
+    border-radius: 3px !important;
+    animation: multiColorBarBlink 3.2s infinite ease-in-out !important;
+}
+
+@keyframes multiColorBarBlink {
+    /* 1. Electric Cyber Cyan */
+    0%, 11% {
+        opacity: 1;
+        background-color: #00f5ff;
+        box-shadow: 0 0 10px #00f5ff, 0 0 22px #00f5ff, 0 0 38px rgba(0, 245, 255, 0.9);
+    }
+    14%, 16.5% {
+        opacity: 0;
+        background-color: #00f5ff;
+        box-shadow: none;
+    }
+
+    /* 2. Hot Neon Pink / Magenta */
+    17%, 27.5% {
+        opacity: 1;
+        background-color: #ff007f;
+        box-shadow: 0 0 10px #ff007f, 0 0 22px #ff007f, 0 0 38px rgba(255, 0, 127, 0.9);
+    }
+    30.5%, 33% {
+        opacity: 0;
+        background-color: #ff007f;
+        box-shadow: none;
+    }
+
+    /* 3. Electric Amber Yellow */
+    33.5%, 44% {
+        opacity: 1;
+        background-color: #ffea00;
+        box-shadow: 0 0 10px #ffea00, 0 0 22px #ffea00, 0 0 38px rgba(255, 234, 0, 0.9);
+    }
+    47%, 49.5% {
+        opacity: 0;
+        background-color: #ffea00;
+        box-shadow: none;
+    }
+
+    /* 4. Cyber Matrix Green */
+    50%, 61% {
+        opacity: 1;
+        background-color: #00ff66;
+        box-shadow: 0 0 10px #00ff66, 0 0 22px #00ff66, 0 0 38px rgba(0, 255, 102, 0.9);
+    }
+    64%, 66.5% {
+        opacity: 0;
+        background-color: #00ff66;
+        box-shadow: none;
+    }
+
+    /* 5. Electric Ultraviolet / Violet */
+    67%, 77.5% {
+        opacity: 1;
+        background-color: #b026ff;
+        box-shadow: 0 0 10px #b026ff, 0 0 22px #b026ff, 0 0 38px rgba(176, 38, 255, 0.9);
+    }
+    80.5%, 83% {
+        opacity: 0;
+        background-color: #b026ff;
+        box-shadow: none;
+    }
+
+    /* 6. Vivid Solar Flame Orange */
+    83.5%, 94% {
+        opacity: 1;
+        background-color: #ff5500;
+        box-shadow: 0 0 10px #ff5500, 0 0 22px #ff5500, 0 0 38px rgba(255, 85, 0, 0.9);
+    }
+    97%, 100% {
+        opacity: 0;
+        background-color: #ff5500;
+        box-shadow: none;
+    }
 }
 
 .problems-hero .hero-subtitle {
@@ -117,147 +234,377 @@
 }
 
 .filter-btn {
-    padding: 10px 20px;
-    background: transparent;
-    border: 2px solid rgba(0, 255, 255, 0.3);
+    padding: 10px 22px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
     border-radius: 25px;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
+    color: #94a3b8;
+    font-size: 0.88rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    backdrop-filter: blur(10px);
 }
 
-.filter-btn:hover,
-.filter-btn.active {
-    border-color: var(--primary-neon);
-    color: var(--primary-neon);
-    background: rgba(0, 255, 255, 0.1);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+.filter-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* All Problems button */
+.filter-btn[data-filter="all"].active,
+.filter-btn[data-filter="all"]:hover {
+    border-color: #00f0ff;
+    color: #00f0ff;
+    background: rgba(0, 240, 255, 0.12);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
+
+/* Full Stack button */
+.filter-btn[data-filter="web"] {
+    border-color: rgba(0, 240, 255, 0.3);
+    color: #38bdf8;
+}
+.filter-btn[data-filter="web"].active,
+.filter-btn[data-filter="web"]:hover {
+    border-color: #00f0ff;
+    color: #00f0ff;
+    background: rgba(0, 240, 255, 0.16);
+    box-shadow: 0 0 22px rgba(0, 240, 255, 0.45);
+}
+
+/* AI button */
+.filter-btn[data-filter="ai"] {
+    border-color: rgba(192, 132, 252, 0.3);
+    color: #c084fc;
+}
+.filter-btn[data-filter="ai"].active,
+.filter-btn[data-filter="ai"]:hover {
+    border-color: #c084fc;
+    color: #ffffff;
+    background: rgba(176, 84, 255, 0.22);
+    box-shadow: 0 0 22px rgba(176, 84, 255, 0.5);
+}
+
+/* IoT for Automation button */
+.filter-btn[data-filter="iot"] {
+    border-color: rgba(0, 255, 170, 0.3);
+    color: #00ffaa;
+}
+.filter-btn[data-filter="iot"].active,
+.filter-btn[data-filter="iot"]:hover {
+    border-color: #00ffaa;
+    color: #00ffaa;
+    background: rgba(0, 255, 170, 0.16);
+    box-shadow: 0 0 22px rgba(0, 255, 170, 0.45);
 }
 
 /* ===== PROBLEMS GRID ===== */
 .problems-grid-section {
     padding: var(--section-padding);
-    background: var(--primary-bg);
+    background: transparent;
+    position: relative;
+    z-index: 1;
 }
 
 .problems-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 32px;
     margin-top: 40px;
+    perspective: 1200px;
 }
 
+/* ========================================================
+   HIGH-TECH CYBER PROBLEM CARD
+   ======================================================== */
 .problem-card {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    border-radius: var(--border-radius);
-    padding: 25px;
-    transition: all var(--transition-medium);
+    --card-theme-color: #00f0ff;
+    --card-theme-rgb: 0, 240, 255;
+    --card-theme-glow: rgba(0, 240, 255, 0.38);
+    --card-theme-bg-tint: rgba(0, 240, 255, 0.08);
     position: relative;
-    overflow: hidden;
+    background: linear-gradient(
+        165deg,
+        var(--card-theme-bg-tint) 0%,
+        rgba(14, 19, 32, 0.94) 28%,
+        rgba(7, 10, 19, 0.98) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--card-theme-rgb), 0.28);
+    border-radius: 22px;
+    padding: 30px 26px 24px;
     cursor: pointer;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, box-shadow;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.72),
+                0 0 16px rgba(var(--card-theme-rgb), 0.08),
+                inset 0 0 1px rgba(var(--card-theme-rgb), 0.25);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Top Traveling Laser Scanline Beam */
 .problem-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    z-index: -1;
+    left: -100%;
+    width: 200%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--card-theme-color) 45%,
+        #ffffff 70%,
+        transparent 100%
+    );
+    opacity: 0.8;
+    animation: cardTopLaser 4.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
 }
 
-.problem-card:hover::before {
-    opacity: 0.05;
+@keyframes cardTopLaser {
+    0% {
+        transform: translateX(-100%);
+    }
+    50%, 100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Specular Light & Ambient Glare */
+.problem-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle 320px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(var(--card-theme-rgb), 0.18) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.35s ease;
+}
+
+.problem-card:hover::after {
+    opacity: 1;
 }
 
 .problem-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary-neon);
-    box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+    border-color: rgba(var(--card-theme-rgb), 0.75);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.88),
+                0 0 38px var(--card-theme-glow),
+                inset 0 0 22px rgba(var(--card-theme-rgb), 0.12);
 }
 
-/* Hidden cards for filtering */
+.problem-card:hover::before {
+    opacity: 1;
+    height: 3px;
+    box-shadow: 0 0 18px var(--card-theme-color);
+}
+
+/* Dynamic Thematic Color Palettes for the 3 Hackathon Tracks */
+/* 1. Full Stack / Web Track (Electric Cyan) */
+.problem-card[data-theme="web"],
+.problem-card[data-category="web"] {
+    --card-theme-color: #00f0ff;
+    --card-theme-rgb: 0, 240, 255;
+    --card-theme-glow: rgba(0, 240, 255, 0.4);
+    --card-theme-bg-tint: rgba(0, 240, 255, 0.08);
+}
+
+/* 2. AI Track (Cyber Violet / Neon Orchid) */
+.problem-card[data-theme="ai"],
+.problem-card[data-category="ai"] {
+    --card-theme-color: #c084fc;
+    --card-theme-rgb: 192, 132, 252;
+    --card-theme-glow: rgba(192, 132, 252, 0.42);
+    --card-theme-bg-tint: rgba(176, 84, 255, 0.08);
+}
+
+/* 3. IoT for Automation Track (Matrix Neon Emerald / Cyber Mint) */
+.problem-card[data-theme="iot"],
+.problem-card[data-category="iot"] {
+    --card-theme-color: #00ffaa;
+    --card-theme-rgb: 0, 255, 170;
+    --card-theme-glow: rgba(0, 255, 170, 0.4);
+    --card-theme-bg-tint: rgba(0, 255, 170, 0.08);
+}
+
+/* Silky Smooth Filter Transitions */
+.problem-card.fade-out {
+    opacity: 0 !important;
+    transform: scale(0.92) translateY(12px) !important;
+    transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    pointer-events: none !important;
+}
+
+.problem-card.fade-in {
+    opacity: 1 !important;
+    transform: scale(1) translateY(0) !important;
+    transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 .problem-card.hidden {
-    display: none;
+    display: none !important;
 }
 
+/* Problem Header */
 .problem-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    transform: translateZ(25px);
 }
 
+/* Number Badge */
 .problem-number {
     font-family: var(--font-primary);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 900;
-    color: var(--primary-neon);
-    background: rgba(0, 255, 255, 0.1);
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: 1px solid var(--primary-neon);
-}
-
-.problem-category {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 5px 12px;
-    border-radius: 15px;
-}
-
-.difficulty-badge {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 4px 10px;
+    color: var(--card-theme-color);
+    background: rgba(var(--card-theme-rgb), 0.12);
+    padding: 6px 14px;
     border-radius: 12px;
-    letter-spacing: 0.5px;
+    border: 1px solid rgba(var(--card-theme-rgb), 0.42);
+    box-shadow: 0 0 14px rgba(var(--card-theme-rgb), 0.22), inset 0 0 8px rgba(var(--card-theme-rgb), 0.1);
+    letter-spacing: 1px;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, background 0.35s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.difficulty-badge.easy {
-    background: rgba(0, 255, 0, 0.2);
-    color: #00ff00;
-    border: 1px solid #00ff00;
+.problem-number::before {
+    content: '#';
+    font-size: 0.82rem;
+    opacity: 0.75;
+    font-weight: 500;
 }
 
-.difficulty-badge.medium {
-    background: rgba(255, 255, 0, 0.2);
-    color: #ffff00;
-    border: 1px solid #ffff00;
+.problem-card:hover .problem-number {
+    transform: scale(1.1);
+    background: rgba(var(--card-theme-rgb), 0.22);
+    box-shadow: 0 0 22px rgba(var(--card-theme-rgb), 0.6);
 }
 
-.difficulty-badge.hard {
-    background: rgba(255, 0, 0, 0.2);
-    color: #ff0080;
-    border: 1px solid #ff0080;
+/* Category Badge with Live Pulse Dot */
+.problem-category {
+    font-family: var(--font-primary);
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--card-theme-color);
+    background: rgba(var(--card-theme-rgb), 0.1);
+    border: 1px solid rgba(var(--card-theme-rgb), 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(var(--card-theme-rgb), 0.18);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 }
 
+.problem-category::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--card-theme-color);
+    box-shadow: 0 0 8px var(--card-theme-color);
+    animation: statusDotPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes statusDotPulse {
+    0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+        box-shadow: 0 0 12px var(--card-theme-color);
+    }
+}
+
+.problem-card:hover .problem-category {
+    background: rgba(var(--card-theme-rgb), 0.22);
+    border-color: var(--card-theme-color);
+    box-shadow: 0 0 18px rgba(var(--card-theme-rgb), 0.5);
+}
+
+/* Title */
 .problem-title {
     font-family: var(--font-primary);
-    font-size: 1.4rem;
-    color: var(--text-primary);
-    margin-bottom: 15px;
-    line-height: 1.3;
+    font-size: 1.24rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 14px;
+    line-height: 1.42;
+    letter-spacing: 0.4px;
+    position: relative;
+    z-index: 2;
+    transform: translateZ(30px);
+    transition: color 0.35s ease, text-shadow 0.35s ease;
 }
 
+.problem-card:hover .problem-title {
+    color: #ffffff;
+    text-shadow: 0 0 18px rgba(var(--card-theme-rgb), 0.55);
+}
+
+/* Description */
 .problem-description {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.68;
+    margin-bottom: 18px;
+    font-size: 0.94rem;
+    position: relative;
+    z-index: 2;
+    transform: translateZ(15px);
+    transition: color 0.3s ease;
+    flex: 1;
+}
+
+.problem-card:hover .problem-description {
+    color: #f1f5f9;
+}
+
+/* Bottom Animated Expanding Cyber Indicator */
+.problem-description::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 48px;
+    margin-top: 18px;
+    background: rgba(var(--card-theme-rgb), 0.38);
+    box-shadow: 0 0 8px rgba(var(--card-theme-rgb), 0.35);
+    border-radius: 2px;
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.problem-card:hover .problem-description::after {
+    width: 100%;
+    background: linear-gradient(90deg, var(--card-theme-color) 0%, transparent 100%);
+    box-shadow: 0 0 14px rgba(var(--card-theme-rgb), 0.8);
 }
 
 .problem-tags {
@@ -268,13 +615,20 @@
 }
 
 .tag {
-    background: rgba(0, 255, 255, 0.1);
-    color: var(--primary-neon);
+    background: rgba(var(--card-theme-rgb), 0.1);
+    color: var(--card-theme-color);
     padding: 4px 10px;
     border-radius: 12px;
     font-size: 0.75rem;
-    border: 1px solid rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(var(--card-theme-rgb), 0.3);
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.problem-card:hover .tag {
+    background: rgba(var(--card-theme-rgb), 0.18);
+    border-color: rgba(var(--card-theme-rgb), 0.6);
+    box-shadow: 0 0 10px rgba(var(--card-theme-rgb), 0.3);
 }
 
 .problem-footer {
@@ -283,7 +637,7 @@
     align-items: center;
     margin-top: auto;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(var(--card-theme-rgb), 0.18);
 }
 
 .estimated-time {
@@ -291,35 +645,40 @@
     font-size: 0.85rem;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+}
+
+.estimated-time i {
+    color: var(--card-theme-color);
 }
 
 .select-btn {
     padding: 8px 20px;
-    background: transparent;
-    border: 2px solid var(--secondary-neon);
+    background: rgba(var(--card-theme-rgb), 0.08);
+    border: 1.5px solid rgba(var(--card-theme-rgb), 0.5);
     border-radius: 25px;
-    color: var(--secondary-neon);
+    color: var(--card-theme-color);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .select-btn:hover {
-    background: var(--secondary-neon);
-    color: var(--primary-bg);
-    box-shadow: 0 0 20px var(--secondary-neon);
+    background: var(--card-theme-color);
+    color: #030712;
+    border-color: var(--card-theme-color);
+    box-shadow: 0 0 20px rgba(var(--card-theme-rgb), 0.6);
     transform: translateY(-2px);
 }
 
 .select-btn.selected {
-    background: var(--gradient-secondary);
-    border-color: var(--tertiary-neon);
-    color: var(--primary-bg);
-    box-shadow: 0 0 25px var(--tertiary-neon);
+    background: linear-gradient(135deg, var(--card-theme-color) 0%, #ffffff 100%);
+    border-color: #ffffff;
+    color: #030712;
+    box-shadow: 0 0 25px rgba(var(--card-theme-rgb), 0.8);
 }
 
 /* ===== PROBLEMS CTA SECTION ===== */
@@ -428,41 +787,14 @@
     }
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeInUp {
+/* ===== RIPPLE & SMOOTH REVEAL ANIMATIONS ===== */
+@keyframes cardRipple {
     from {
-        opacity: 0;
-        transform: translateY(30px);
+        transform: scale(0);
+        opacity: 0.9;
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
+        opacity: 0;
     }
-}
-
-.problem-card {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.problem-card:nth-child(odd) {
-    animation-delay: 0.1s;
-}
-
-.problem-card:nth-child(even) {
-    animation-delay: 0.2s;
-}
-
-/* ===== FILTER ANIMATIONS ===== */
-.problem-card.filtering {
-    transition: all 0.4s ease;
-}
-
-.problem-card.fade-out {
-    opacity: 0;
-    transform: scale(0.8);
-}
-
-.problem-card.fade-in {
-    opacity: 1;
-    transform: scale(1);
 }
