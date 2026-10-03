@@ -896,6 +896,108 @@ body.intro-locked {
     perspective: 1200px;
 }
 
+.event-info {
+    position: relative;
+    max-width: 960px;
+    margin: 64px auto 0;
+    padding: 28px 32px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 18px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(0, 240, 255, 0.09), transparent 48%),
+        linear-gradient(135deg, rgba(8, 20, 31, 0.96), rgba(15, 10, 26, 0.96));
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 24px rgba(0, 240, 255, 0.08);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-info::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(0, 240, 255, 0.32) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.event-info:hover {
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.38), 0 0 28px rgba(0, 240, 255, 0.14);
+}
+
+.event-info-heading,
+.event-info-amenities,
+.event-info p {
+    position: relative;
+    z-index: 1;
+}
+
+.event-info-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.event-info-icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 1px solid rgba(0, 240, 255, 0.42);
+    border-radius: 13px;
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--primary-neon);
+    font-family: var(--font-primary);
+    font-size: 1.4rem;
+    box-shadow: 0 0 18px rgba(0, 240, 255, 0.12);
+}
+
+.event-info-eyebrow {
+    color: var(--primary-neon);
+    font-family: var(--font-primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.event-info-heading h3 {
+    margin-top: 2px;
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+    line-height: 1.3;
+}
+
+.event-info-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.event-info-amenities span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 999px;
+    background: rgba(0, 240, 255, 0.055);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+}
+
+.event-info p {
+    max-width: 820px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
 /* Primary Prize Cards */
 .prize-card {
     position: relative;
